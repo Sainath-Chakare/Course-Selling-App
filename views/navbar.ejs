@@ -1,0 +1,58 @@
+<style>
+    .btn-search{
+      background-color: #3B71CA;
+      color:white;
+      border-radius: 25px;
+      padding: 0 1rem;
+    }
+    .btn-search:hover{
+      background-color: #3B71CA;
+      color:white;
+      cursor: pointer;
+    }
+    .btn-search i{
+      display: inline;
+      margin-right: 0.5rem;
+    }
+    .search-input{
+      border-radius: 25px;
+      padding: 0.5rem 3rem;
+    }
+</style>
+  
+<nav class="navbar navbar-expand-md bg-body border-bottom sticky-top">
+    <div class="container-fluid">
+      <% if(admintoken) { %>
+        <a class="navbar-brand" href="/api/v1/admin/course/bulk"><b>Coursera</b></a>
+      <% } else { %>
+        <a class="navbar-brand" href="/api/v1/course/preview"><b>Coursera</b></a>
+      <% } %>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <% if(!admintoken) { %>
+            <form action="/api/v1/admin/options">
+              <button class="btn btn-primary btn-navbar" type="submit">Create Courses</button>
+            </form>
+          <% } %>
+          <div class="navbar-nav ms-auto">
+              <form class="d-flex" role="search">
+                  <input class="form-control me-2 search-input" type="search" placeholder="Search courses">
+                  <button class="btn btn-search" type="submit">Search</button>
+              </form>
+          </div>
+          <div class="navbar-nav ms-auto">
+            <% if(!usertoken && !admintoken){ %>
+              <form action="/api/v1/user/signup"><button class="btn btn-secondary btn-navbar">Sign up</button></form>
+              &nbsp;&nbsp;&nbsp;
+              <form action="/api/v1/user/signin"><button class="btn btn-secondary btn-navbar">Sign in</button></form>
+            <% } else if(admintoken){ %>
+              <form method="post" action="/api/v1/admin/logout"><button class="btn btn-secondary btn-navbar">Log out</button></form>
+            <% } else { %>
+              <form method="post" action="/api/v1/user/logout"><button class="btn btn-secondary btn-navbar">Log out</button></form>
+            <% } %>
+          </div>
+        </div>
+    </div>
+</nav>

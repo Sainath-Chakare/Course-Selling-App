@@ -1,0 +1,33 @@
+<%- layout('boilerplate') %>
+
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>All Courses</h2>
+        <% if(usertoken) { %>
+            <a href="/api/v1/user/purchases" class="btn btn-success">Your courses</a>
+        <% } %>
+    </div>
+    <div class="row">
+        <% courses.forEach(course => { %>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img src="<%= course.imageUrl || 'https://images.shiksha.com/mediadata/ugcDocuments/images/wordpressImages/2022_08_MicrosoftTeams-image-13-2-1.jpg' %>" class="card-img-top" alt="<%= course.title %>">
+                    <div class="card-body">
+                        <h5 class="card-title"><%= course.title %></h5>
+                        <p class="card-text"><%= course.description %></p>
+                        <p class="card-text"><strong>Price: </strong> $<%= course.price %></p>
+                    </div>
+                    <div class="card-footer text-center">
+                        <% if(purchasedIds.includes(course._id.toString())) { %>
+                            <button class="btn btn-success">View Course</button>
+                        <% } else { %>
+                            <form action="/api/v1/course/purchase/<%= course._id %>" method="post">
+                                <button class="btn btn-primary">Purchase Course</button>
+                            </form>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+</div>

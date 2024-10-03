@@ -1,0 +1,24 @@
+<%- layout('boilerplate') %>
+
+<div class="row mt-5">
+    <div class="col-md-6 offset-3">
+        <h3>Welcome to <%=role%> SignIn</h3>
+        <form action="/api/v1/<%=role%>/signin" method="post" class="needs-validation mt-4" novalidate>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="text" id="email" name="email" class="form-control" placeholder="Enter Email" required>
+                <div class="invalid-feedback">Please enter an unique email</div>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="text" id="password" name="password" class="form-control" placeholder="Enter password" required>
+                <div class="invalid-feedback">Please enter a password</div>
+            </div>
+            <br>
+            <button class="btn btn-success">SignIn</button>
+            <br>
+        </form>
+    </div>
+</div>
+
+
