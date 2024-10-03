@@ -125,12 +125,8 @@ adminRouter.put("/course/:courseId",async (req,res)=>{
             {_id:courseId,creatorId:req.adminId},
             {title,description,imageUrl,price}
         );
-        if(result.modifiedCount > 0){
-            // res.json({message: "Course Details has been updated", courseId})
-            res.redirect("/api/v1/admin/course/bulk");
-        }else{
-            res.json({message: "You need to be creator to edit this course"});
-        }
+        // res.json({message: "Course Details has been updated", courseId})
+        res.redirect("/api/v1/admin/course/bulk");
     }catch(err){
         res.json({message:err.message});
     }
